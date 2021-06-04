@@ -13,7 +13,7 @@
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="col-lg-3 col-md-3 col-lg-6">
-                    <h2 class="p-3 h2">Add Category</h2> 
+                    <h2 class="p-3 h2">Add Banner</h2> 
                 </div>
                 <div class="col-lg-12">
                     <div class="row" style="margin: auto;">
@@ -21,12 +21,16 @@
                         <form>
                            
                                 <div class="form-group" >
-                                    <label for="categories" class=" form-control-label">Categories</label>
-                                    <input type="text" name="category" placeholder="Enter categories name" class="form-control">
+                                    <label for="categories" class=" form-control-label">title</label>
+                                    <input type="text" name="title" placeholder="Enter Banner title" class="form-control">
                                 </div>
                                 <div class="form-group" >
                                     <label for="categories" class=" form-control-label">Featured image</label>
                                     <input type="text" name="image" placeholder="paste image url" class="form-control">
+                                </div>
+                                <div class="form-group" >
+                                    <label for="categories" class=" form-control-label">Redirecting URL</label>
+                                    <input type="text" name="redirect" placeholder="paste category url" class="form-control">
                                 </div>
                                 <div class="form-group" >
                                     <label for="des" class=" form-control-label">Description</label>
@@ -51,14 +55,16 @@
         const form =document.querySelector("form");
         form.addEventListener("submit",(e)=>{
             e.preventDefault();
-            const category_name=form.category.value;
-            const category_description=form.description.value;
+            const title=form.title.value;
             const image=form.image.value;
+            const redirect=form.redirect.value;
+            const description=document.getElementById("des").value;
+       
             
             try{
-                  const data=   fetch("/categories",
+                  const data=   fetch("/add_banner",
                      {method:'POST',
-                     body:JSON.stringify({category_name:category_name,category_description:category_name,image:image}),
+                     body:JSON.stringify({title,image,redirect,description}),
                      headers:{'Content-Type':'application/json'}
                     }).then((result)=>{return result.json();}).then((result)=>{alert(result.msg)})
             }

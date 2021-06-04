@@ -23,6 +23,7 @@
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6",
+    "read-excel-file": "^5.1.0",
     "validators": "^0.3.1"
   }
 }

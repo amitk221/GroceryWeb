@@ -39,12 +39,12 @@
                                     <% for (let index = 0; index < products.length; index++) { %>
                                         <tr>
                                         <th><%=   index %> </th>
-                                      <th><%=   products[index].name %> </th>
+                                      <th><%=   products[index].image %> </th>
                                       <th><%=   products[index].name %> </th>
                                       <th><%=   products[index].category %> </th>
                                       <th><%=   products[index].brand %> </th>
-                                      <th><%=   products[index].featured %> </th>
-                                      <th><%=   products[index].price %> </th>
+                                      <th><%=   products[index].unit %> </th>
+                                      <th>₹ <%=   products[index].price %> </th>
                                       <th><%=   products[index].quantity %> </th>
                                       <th>
                                           <button class="btn" id="<%= products[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>

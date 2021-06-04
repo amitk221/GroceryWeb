@@ -88,7 +88,7 @@ router.post('/login',async (req, res) => {
     catch(err) {
       const errors = handleErrors(err);
       res.send({ msg:errors.email || errors.password});
-    }
+    } 
    
   });
   router.get('/profile', async(req, res) => {
@@ -120,7 +120,7 @@ const user=await Admin.findById(id);
 user.email=email;
 user.password=password;
 user.save();
-res.send({msg:"passwod updated"});
+res.send({msg:"password updated"});
 console.log('user updated')
 
 })

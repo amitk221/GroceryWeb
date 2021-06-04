@@ -13,7 +13,7 @@
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="col-lg-3 col-md-3 col-lg-6">
-                    <h2 class="p-3 h2">All Category</h2> 
+                    <h2 class="p-3 h2">All Banner</h2> 
                 </div>
                 <div class="col-lg-12">
                     <div class="card">
@@ -24,26 +24,25 @@
                                    <tr>
                                       
                                       <th>ID</th>
-                                      <th>image</th>
-                                      <th>Categories</th>
-                                      <th>Description</th>
+                                      <th>Banner image</th>
+                                      <th>Banner Title</th>
+                                      <th>Banner Description</th>
                                       <th>Actions</th>
                                       
                                    </tr>
                                 </thead>
                                 <tbody>
                                     
-                                    <% for (let index = 0; index < categories.length; index++) { %>
+                                    <% for (let index = 0; index < banner.length; index++) { %>
                                         <tr>
                                         <th><%=   index %> </th>
-                                        <th><img src=" <%=   categories[index].image %>" height="120" alt="">  </th>
-                                      <th><%=   categories[index].name %> </th>
-                                    
-                                      <th><%=   categories[index].description %> </th>
+                                        <th> <img src="<%=   banner[index].image %>" height="100" alt=""> </th>
+                                      <th><%=   banner[index].title %> </th>
+                                      <th><%=   banner[index].description %> </th>
                                      
                                       <th>
-                                          <button class="btn" id="<%= categories[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
-                                          <button class="btn"  id="<%= categories[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
+                                          <button class="btn" id="<%= banner[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
+                                          <button class="btn"  id="<%= banner[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
                                         </th>
                                     </tr>
                                         <%
@@ -61,10 +60,10 @@
     </div>
     <script>
         function deleteProduct(product){
-            location.replace('/category/delete/'+product.id);
+            location.replace('/banner/delete/'+product.id);
         }
         function updateProduct(product){
-            location.replace('/category/update/'+product.id);
+            location.replace('/banner/update/'+product.id);
         }
     </script>
 </body>
