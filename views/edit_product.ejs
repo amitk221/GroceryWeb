@@ -27,17 +27,13 @@
                                             <div class="col-sm-6 col-11 ">
                                                 <div class="container-fluid">
                                                     <div class="form__group field">
-                                                        <input type="input" class="form__field" placeholder="Name"
-                                                            name="product_name" id='name' value="<%= products.name %>"
-                                                            required />
+                                                        <input type="input" class="form__field" placeholder="Name" name="product_name" id='name' value="<%= products.name %>" required />
                                                         <label for="name" class="form__label">Product Name</label>
                                                     </div>
                                                 </div>
                                                 <div class="container-fluid">
                                                     <div class="form__group field">
-                                                        <textarea class="form-control" placeholder="Description"
-                                                            name="product_description" cols="12" rows="5" id='name'
-                                                            required>
+                                                        <textarea class="form-control" placeholder="Description" name="product_description" cols="12" rows="5" id='name' required>
                                                            <%= products.description %>
                                                         </textarea>
                                                         <label for="name" class="form__label">Product
@@ -50,25 +46,21 @@
                                                     <div class="form__group field">
                                                         <label class="form__label" for="product_price">Product
                                                             Price</label>
-                                                        <input type="number" class="form__field" id="product_price"
-                                                            name="product_price" value="<%= products.price %>">
+                                                        <input type="number" class="form__field" id="product_price" name="product_price" value="<%= products.price %>">
                                                     </div>
                                                 </div>
                                                 <div class="container-fluid">
                                                     <div class="form__group field">
                                                         <label class="form__label" for="product_qt">Product
                                                             Quanity</label>
-                                                        <input type="number" class="form__field"
-                                                            value="<%= products.quantity %>" id="product_qt"
-                                                            name="product_qt">
+                                                        <input type="number" class="form__field" value="<%= products.quantity %>" id="product_qt" name="product_qt">
                                                     </div>
                                                 </div>
                                                 <div class="container-fluid">
                                                     <div class="form__group field">
                                                         <label class="form__label" for="product_brand">Product
                                                             Brand</label>
-                                                        <input type="text" class="form__field" id="product_brand"
-                                                            value="<%= products.brand %>" name="product_brand">
+                                                        <input type="text" class="form__field" id="product_brand" value="<%= products.brand %>" name="product_brand">
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,15 +95,11 @@
                                                 <div class="form-group">
                                                     <div class="form__group field">
                                                         <label for="product_image_1">Product Image 1</label>
-                                                        <input type="text" class="form__field" id="fileinput"
-                                                            value="<%= products.product_image_1 %>"
-                                                            name="product_image_1">
+                                                        <input type="text" class="form__field" id="fileinput" value="<%= products.product_image_1 %>" name="product_image_1">
                                                     </div>
                                                     <div class="form__group field">
                                                         <label for="product_image_2">Product Image 2</label>
-                                                        <input type="text" class="form__field" id="product_image_2"
-                                                            value="<%= products.product_image_2 %>"
-                                                            name="product_image_2">
+                                                        <input type="text" class="form__field" id="product_image_2" value="<%= products.product_image_2 %>" name="product_image_2">
                                                     </div>
                                                     <input type="hidden" name="id" value="<%= products._id %>">
                                                 </div>
@@ -134,7 +122,7 @@
                     const form = document.querySelector('form');
 
 
-                    form.addEventListener('submit', async (e) => {
+                    form.addEventListener('submit', async(e) => {
                         e.preventDefault();
                         const product_description = form.product_description.value;
                         const product_price = form.product_price.value;
@@ -149,18 +137,31 @@
                         try {
                             const res = fetch(`/product/update/${id}`, {
                                 method: 'POST',
-                                body: JSON.stringify({ description:product_description, name:product_name, price: product_price, 
-                                    category: product_category, quantity:product_qt, product_image_2:product_image_2, product_image_1:product_image_1, brand:product_brand, unit:unit }),
-                                headers: { 'Content-Type': 'application/json' }
-                            }).then((res) => { return res.json() }).then((result => { alert(result.message) }));
+                                body: JSON.stringify({
+                                    description: product_description,
+                                    name: product_name,
+                                    price: product_price,
+                                    category: product_category,
+                                    quantity: product_qt,
+                                    product_image_2: product_image_2,
+                                    product_image_1: product_image_1,
+                                    brand: product_brand,
+                                    unit: unit
+                                }),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then((res) => {
+                                return res.json()
+                            }).then((result => {
+                                alert(result.message)
+                            }));
 
                             console.log(data);
-                        }
-                        catch (err) {
+                        } catch (err) {
                             console.log(err)
                         }
                     });
-
                 </script>
 </body>
 

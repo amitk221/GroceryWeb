@@ -18,7 +18,12 @@ const ProductSchema = new mongoose.Schema({
 const CategorySchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
-    image: { type: String, required: false }
+    image: { type: String, required: false },
+})
+
+const categoryProductsSchema = new mongoose.Schema({
+    category_id: { type: String, required: true },
+    products: [{ type: String }],
 })
 
 const Banner_s = new mongoose.Schema({
@@ -29,5 +34,6 @@ const Banner_s = new mongoose.Schema({
 })
 const Banner = mongoose.model("banner", Banner_s);
 const Category = mongoose.model("category", CategorySchema);
+const CategoryProducts = mongoose.model("categoryProducts", categoryProductsSchema);
 const Product = mongoose.model('product', ProductSchema);
-module.exports = { Product, Category, Banner };
+module.exports = { Product, Category, Banner, CategoryProducts };

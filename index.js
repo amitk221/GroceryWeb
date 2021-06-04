@@ -4,12 +4,13 @@ const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const PORT = process.env.PORT || 3000;
 const ejs = require("ejs");
-const xls=require("read-excel-file/node");
+const xlsx = require('xlsx');
 const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const datarouter = require('./routes/productRoute');
 const config = require("./config/config");
+const multer = require('multer');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/authRoute');
 const mailRouter = require("./routes/mailRoute").router;
@@ -20,15 +21,11 @@ const Category = require('./models/product').Category;
 const Product = require('./models/product').Product;
 const Banner = require('./models/product').Banner;
 const Order = require('./models/Order').Order;
-// <<<<<<< HEAD
-const { Adress } = require('./models/Order');
 const User = require('./models/User');
-const mongoUrl=config.MONGODB_URL;
-// =======
+const mongoUrl = config.MONGODB_URL;
 const Address = require('./models/Order').Address;
+const CategoryProducts = require('./models/product').CategoryProducts;
 
-// >>>>>>> 9b572400d46e5c10d91716357092f91b5dc1f34c
-// const mongoUrl="";
 mongoose.connect(mongoUrl, {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -53,29 +50,43 @@ app.use(function(req, res, next) {
 app.use(authRouter);
 app.use(mailRouter);
 
+const upload = multer({ storage: multer.memoryStorage() })
 
 
 // xls
-app.get("/xls",(req,res)=>{
- xls("./data.xlsx")
-  .then((rows)=>{
-    console.log(rows)
-    res.json(rows);
-  });
-  
-})
+app.post("/api/upload/products", upload.single('excelFile'), async(req, res) => {
+
+    var workbook = xlsx.read(req.file.buffer);
+    var sheet_name_list = workbook.SheetNames;
+    products = [];
+    for (var i = 0; i < sheet_name_list.length; i++) {
+        var xlData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[i]]);
+        products.push.apply(products, xlData);
+    }
+
+    for (var j = 0; j < products.length; j++) {
+        const product = await Product.create(products[j]);
+        if (!product._id) {
+            res.json("Error");
+        }
+    }
+
+    console.log(products);
+    res.json(products);
+});
+
 
 // %%%%%%%%%%%%%%% category
 app.get("/api/categories", async(req, res) => {
     const categories = await Category.find();
-
     res.json(categories)
 });
 
 app.get("/api/categories/:id", async(req, res) => {
     const id = req.params.id;
-    const productscat = await Product.find({ category_id: id });
-    res.json(productscat);
+    const productIds = await CategoryProducts.find({ category_id: id }).products;
+    const products = await Product.find({ _id: { $in: productIds } });
+    res.json(products);
 });
 
 
@@ -351,12 +362,12 @@ app.get('/api/order/delete/:userid', async(req, res) => {
 });
 
 
-  app.get('/api/users',async(req,res)=>{
-    const users=await User.find();
+app.get('/api/users', async(req, res) => {
+    const users = await User.find();
     res.json(users);
-    });
-  
-  
+});
+
+
 
 app.delete('/api/order/:id', async(req, res) => {
 
