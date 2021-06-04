@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">All Category</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                       <div class="card-body--">
+                          <div class="table-reponsive table-stats order-table ov-h " style="overflow:auto;">
+                             <table class="table  table-bordered table-hover">
+                                <thead>
+                                   <tr>
+                                      
+                                      <th>ID</th>
+                                      <th>Categories</th>
+                                      <th>Description</th>
+                                      <th>Actions</th>
+                                      
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <% for (let index = 0; index < categories.length; index++) { %>
+                                        <tr>
+                                        <th><%=   index %> </th>
+                                      <th><%=   categories[index].name %> </th>
+                                      <th><%=   categories[index].description %> </th>
+                                     
+                                      <th>
+                                          <button class="btn" id="<%= categories[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
+                                          <button class="btn"  id="<%= categories[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
+                                        </th>
+                                    </tr>
+                                        <%
+                                    
+                                        
+                                    } %> 
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+        <%- include('partials/footer') %>
+    </div>
+    <script>
+        function deleteProduct(product){
+            location.replace('/category/delete/'+product.id);
+        }
+        function updateProduct(product){
+            location.replace('/category/update/'+product.id);
+        }
+    </script>
+</body>
+</html>

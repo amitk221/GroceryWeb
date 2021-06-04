@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">All Products</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                       <div class="card-body--">
+                          <div class="table-reponsive " style="overflow:auto;">
+
+                             <table class="table  table-bordered table-hover table-dark">
+                                <thead>
+                                 
+                                      
+                                      <th>ID</th>
+                                      <th>Image</th>
+                                      <th>Name</th>
+                                      <th>Category</th>
+                                      <th>Brand</th>
+                                      <th>Unit</th>
+                                      <th>Price</th>
+                                      <th>Qty</th>
+                                      <th>Action</th>
+                                   
+                                </thead>
+                                <tbody>
+                                    <% for (let index = 0; index < products.length; index++) { %>
+                                        <tr>
+                                        <th><%=   index %> </th>
+                                      <th><%=   products[index].name %> </th>
+                                      <th><%=   products[index].name %> </th>
+                                      <th><%=   products[index].category %> </th>
+                                      <th><%=   products[index].brand %> </th>
+                                      <th><%=   products[index].featured %> </th>
+                                      <th><%=   products[index].price %> </th>
+                                      <th><%=   products[index].quantity %> </th>
+                                      <th>
+                                          <button class="btn" id="<%= products[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
+                                          <button class="btn"  id="<%= products[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
+                                        </th>
+                                    </tr>
+                                        <%
+                                    
+                                        
+                                    } %> 
+                                   
+                                        
+                                 
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+        <%- include('partials/footer') %>
+    </div>
+    <script>
+        function deleteProduct(product){
+            location.replace('/product/delete/'+product.id);
+        }
+        function updateProduct(product){
+            location.replace('/product/update/'+product.id);
+        }
+    </script>
+</body>
+</html>

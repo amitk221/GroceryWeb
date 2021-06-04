@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">Add Category</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="row" style="margin: auto;">
+                        <div class="col-sm-4 col-md-4" style="margin:0 auto;padding: 0.3rem;">
+                        <form>
+                           
+                                <div class="form-group" >
+                                    <label for="categories" class=" form-control-label">Categories</label>
+                                    <input type="text" name="category" placeholder="Enter categories name" class="form-control">
+                                </div>
+                                <div class="form-group" >
+                                    <label for="des" class=" form-control-label">Description</label>
+                                    <textarea name="description" id="des" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group" >
+                                     <button  name="submit" type="submit" style="margin: auto;" class="btn btn-primary ">
+                                    Submit
+                                </button>
+                                </div>
+                            </div>
+                         
+                            
+                          
+                        </form>
+                    </div>
+                    </div>
+                </div></div>
+        <%- include('partials/footer') %>
+    </div>
+    <script>
+        const form =document.querySelector("form");
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            const category_name=form.category.value;
+            const category_description=form.description.value;
+            
+            try{
+                  const data=   fetch("/categories",
+                     {method:'POST',
+                     body:JSON.stringify({category_name:category_name,category_description:category_name}),
+                     headers:{'Content-Type':'application/json'}
+                    }).then((result)=>{return result.json();}).then((result)=>{alert(result.msg)})
+            }
+            catch(Err){
+                console.log(Err);
+            }
+        });
+    </script>
+</body>
+</html>

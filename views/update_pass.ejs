@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <title>update password</title>
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
+       <!--CUSTOM BASIC STYLES-->
+    <link href="/assets/css/basic.css" rel="stylesheet" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="/assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<!-- Include fusion theme -->
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+   <style>
+    .bg-img {
+        background-image: url("commerce.jpg");
+        min-height: 100vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    .login-form {
+        width: 340px;
+        margin: 0 auto;
+        padding-top: 110px;
+        font-size: 15px;
+       
+    }
+    .login-form form {
+        margin-bottom: 15px;
+        background: #fff;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }</style>
+</head>
+<body  >
+    <div class="bg-img">
+        <div class="login-form">
+        <form >
+            <h2 class="text-center">Update your passowrd</h2>       
+            <div class="form-group">
+              
+                <input type="hidden" class="form-control" placeholder="Username" name="email" required="required" value="<%=  %> ">
+            </div>
+            <div class="form-group">
+                
+                <input type="password" class="form-control" placeholder=" new Password " name="password" required="required">
+            </div>
+            <div class="form-group">
+                
+                <input type="password" class="form-control" placeholder="Repeat Password " name="password1" required="required" onchange="checker()">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Register </button>
+            </div>
+            <div class="clearfix">
+        
+                <a href="/login" style="float: right;">registered ? , Login</a>
+            </div>        
+        </form>
+        
+    </div>
+    <script>
+        const form=document.querySelector('form');
+        
+        function checker(){
+            
+            const p1=form.password.value;
+         
+            const p2=form.password1.value;
+            console.log(p1,p2);
+            if(p1===p2){
+             return true;
+
+            }
+            else if(p1!==p2){
+            
+            alert("password not matching");
+            return false;
+            }
+            else{
+                return true;
+            }
+         }
+        form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        const email=form.email.value;
+        const password=form.password.value;
+       
+      console.log(admin_id);
+        try{
+           const res= fetch("/update_pass",{
+                method:'POST',
+                body:JSON.stringify({email,password}),
+                headers:{'Content-Type':'application/json'}
+            }).then((res)=>{return res.json()}).then((result=>{alert(result.msg);location.replace("/login");}));
+          const data=await res.json();
+          console.log(data);
+        }
+        catch(err){
+           console.log(err)
+        }
+        });
+     
+     </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+  
+</head>
+<body background="#e2e2e2">
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="table-reponsive" style="overflow:auto;">
+        <table class="table  table-bordered table-hover">
+            <thead >
+                 <th>No</th>
+                 <th>Order ID</th>
+                 <th>Payment Method</th>
+                 <th>Status</th>
+                 <th>Total</th>
+                 <th>Actions</th>
+             </thead>
+             <tbody>
+                 <tr>
+                     <td>1</td>
+                     <td>#182730</td>
+                     <td>cash</td>
+                     <td><span class="bg-primary p-4 rounded">processing</span></td>
+                     <td>$1234</td>
+                     <td>
+                         <i class="fa eye fa-eye fa-1x p-2"></i>
+                        <i class="fa trash fa-trash fa-1x p-2"></i>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td>2</td>
+                    <td>#182731</td>
+                    <td>cash</td>
+                    <td><span class="bg-primary p-4 rounded">processing</span></td>
+                    <td>$1034</td>
+                    <td> 
+                        <i class="fa eye fa-eye fa-1x p-2"></i>
+                        <i class="fa trash fa-trash fa-1x p-2"></i>
+                   </td>
+                </tr>
+             </tbody>
+        </table>
+        </div>
+        </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+</body>
+</html>

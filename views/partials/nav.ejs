@@ -1,0 +1,44 @@
+<!-- include this file under wrapper id -->
+<!-- NAVBAR -->
+<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">AVIPL</a>
+    </div>
+    <div class="header-left">
+
+    </div>
+    <div class="header-right">
+        <div class="btn-group" role="group" aria-label="">
+                    
+            <div class="btn-group" role="group">
+                <button id="dropdownId" type="button" class="btn btn-light dropdown-toggle bg-light " data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    <div style="flex-direction: row;justify-content: space-between;display: flex;">
+                        <div  style="flex: 1;">
+                            <i class="fa fa-user" style="color: black;font-size: 1.5rem;"></i>
+                        </div>
+                        <div  style="flex: 2;color: #000;display: flex; padding-left: 0.4rem;">
+                            <p style="margin: auto;" id="username"><%= admin.email  %> </p>
+                        </divsername>
+                    </div>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <ul class="ul">
+                         <li><span style="text-align: center;padding:0.3rem ;color: #000;">Welcome  !</span></li>
+                        <li class="" > <a class="dropdown-item   m-1 " href="/profile" style="text-align: center;padding:0.3rem ;color: #000;"> <i class="fa fa-user fa-sm"></i> Profile</a></li>
+                        <li class="" > <a class="dropdown-item   " href="/logout" style="text-align: center;padding:0.3rem ;color: #000;"> <i class="fa fa-sign-out fa-sm" aria-hidden="true"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</nav>
+<!-- END NAVBAR -->

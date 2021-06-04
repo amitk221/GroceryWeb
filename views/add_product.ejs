@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <!-- include this file under wrapper id -->
+
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">Add Products</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                       <div class="card-body--">
+                           <form >
+                               <div class="row">
+                                   <div class="col-sm-6 col-11 ">
+                                        <div class="container-fluid">
+                                            <div class="form__group field">
+                                                <input type="input" class="form__field" placeholder="Name" name="product_name" id='name' required />
+                                                <label for="name" class="form__label">Product Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid">
+                                            <div class="form__group field">
+                                                <textarea  class="form-control" placeholder="Description" name="product_description" cols="12" rows="5" id='name' required ></textarea>
+                                                <label for="name" class="form__label">Product Description</label>
+                                            </div>
+                                        </div>
+                                            <!-- <label for="product_description">Product Name</label>
+                                            <input type="text" class="form-control" id="product_description" name="product_description"> -->
+                                       <div class="container-fluid">
+                                        <div class="form__group field">
+                                            <label class="form__label" for="product_price">Product Price</label>
+                                            <input type="number" class="form__field" id="product_price" name="product_price">
+                                        </div>
+                                        </div>
+                                        <div class="container-fluid">
+                                        <div class="form__group field">
+                                            <label class="form__label" for="product_qt">Product Quanity</label>
+                                            <input type="number" class="form__field" id="product_qt" name="product_qt">
+                                        </div>
+                                        </div>
+                                        <div class="container-fluid">
+                                        <div class="form__group field" >
+                                            <label class="form__label" for="product_brand">Product Brand</label>
+                                            <input type="text" class="form__field" id="product_brand" name="product_brand">
+                                        </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-sm-6 col-11 ">
+                                        <div class="form__group field">
+                                            <label for="product_category" class="form__label">Product Category</label>
+                                            <select class="form__field" id="product_category" name="product_category">
+                                                <% for (let index = 0; index < categories.length; index++) { %>
+                                                  
+                                                <option value="<%=  categories[index].name %> "><%=   categories[index].name %> </option>
+                                                <% } %> 
+                                            </select>
+                                        </div>
+                                        <div class="form-group" >
+                                            <div class="form__group field" >
+                                                <label for="product_image_1">Product Image 1</label>
+                                                <input type="file" class="form__field" id="fileinput" name="product_image_1">
+                                            </div>
+                                            <div class="form__group field" >
+                                                <label for="product_image_2">Product Image 2</label>
+                                                <input type="file" class="form__field" id="product_image_2" name="product_image_2">
+                                            </div>
+                                            
+                                        </div>  
+                                       
+                                   </div>
+                               </div>
+                               <br><br><br>
+                               <div class="form-group text-center" style="display: block;padding: 2rem;">
+                                   <button type="submit" class="btn btn-primary btn-lg">Create</button>
+                               </div>
+                           </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        <%- include('partials/footer') %>
+    
+    </div>
+    <script>
+       const form=document.querySelector('form');
+       
+
+       form.addEventListener('submit',async (e)=>{
+       e.preventDefault();
+       const product_description=form.product_description.value;
+       const product_price=form.product_price.value;
+       const product_category=form.product_category.value;
+       const product_qt=form.product_qt.value;
+       const product_name=form.product_name.value;
+       const product_brand=form.product_brand.value;
+       const input = document.getElementById('fileinput');
+       const file=input.files[0];
+       try{
+          const res= fetch("/products",{
+               method:'POST',
+               body:JSON.stringify({product_description,product_name,product_price,product_category,product_qt,product_name,file,product_brand}),
+               headers:{'Content-Type':'application/json'}
+           }).then((res)=>{return res.json()}).then((result=>{alert(result.message)}));
+         const data=await res.json();
+         console.log(data);
+       }
+       catch(err){
+          console.log(err)
+       }
+       });
+    
+    </script>
+</body>
+</html>
