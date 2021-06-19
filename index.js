@@ -53,26 +53,31 @@ app.use(mailRouter);
 const upload = multer({ storage: multer.memoryStorage() })
 
 
-// xls
+// xls upload
 app.post("/api/upload/products", upload.single('excelFile'), async(req, res) => {
 
-    var workbook = xlsx.read(req.file.buffer);
-    var sheet_name_list = workbook.SheetNames;
     products = [];
-    for (var i = 0; i < sheet_name_list.length; i++) {
-        var xlData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[i]]);
-        products.push.apply(products, xlData);
-    }
-
-    for (var j = 0; j < products.length; j++) {
-        const product = await Product.create(products[j]);
-        if (!product._id) {
-            res.json("Error");
+    try {
+        var workbook = xlsx.read(req.file.buffer);
+        var sheet_name_list = workbook.SheetNames;
+        for (var i = 0; i < sheet_name_list.length; i++) {
+            var xlData = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[i]]);
+            products.push.apply(products, xlData);
         }
+
+        for (var j = 0; j < products.length; j++) {
+            const product = await Product.create(products[j]);
+            if (!product._id) {
+                res.status(500);
+                res.send("Invalid attributes please check");
+            }
+        }
+        res.json({ "status": "success", "count": products.length });
+    } catch (e) {
+        res.status(500);
+        res.send(e.message);
     }
 
-    console.log(products);
-    res.json(products);
 });
 
 
