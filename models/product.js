@@ -1,25 +1,36 @@
 const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    product_image_2: { type: String, required: false },
-    product_image_1: { type: String, required: false },
-    brand: { type: String, required: false },
-    description: { type: String, required: true },
-    numReviews: { type: Number, default: 0 },
-    quantity: { type: Number, required: true, default: 0 },
-    price: { type: Number, required: true, default: 0 },
-    unit: { type: String, required: false },
-    perUnit: { type: Number, default: 1 },
-    discount: { type: Number, required: false, default: 0 },
-    rating: { type: Number, required: false }
-
-
+    Name: { type: String, required: true },
+    Description: { type: String, required: true },
+    ImageUrl: { type: String, required: false },
+    MSN_SAC_Code: { type: String, required: false },
+    Brand: { type: String, required: false },
+    NumReviews: { type: Number, default: 0 },
+    Quantity: { type: Number, required: true, default: 0 },
+    Price: { type: Number, required: true, default: 0 },
+    Unit: { type: String, required: false },
+    CGST: { type: String, required: false },
+    SGST: { type: String, required: false },
+    IGST: { type: String, required: false },
+    PerUnit: { type: Number, default: 1 },
+    Discount: { type: Number, required: false, default: 0 },
+    Rating: { type: Number, required: false }
 });
+
+
 const CategorySchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    image: { type: String, required: false },
-})
+    Name: { type: String, required: true },
+    Description: { type: String, required: true },
+    ImageUrl: { type: String, required: false },
+    Products: [{ type: ProductSchema }],
+});
+
+const CategoryGroupSchema = new mongoose.Schema({
+    Name: { type: String, required: true },
+    Description: { type: String, required: true },
+    ImageUrl: { type: String, required: false },
+    Categories: [{ type: CategorySchema }],
+});
 
 const categoryProductsSchema = new mongoose.Schema({
     category_id: { type: String, required: true },
@@ -36,4 +47,5 @@ const Banner = mongoose.model("banner", Banner_s);
 const Category = mongoose.model("category", CategorySchema);
 const CategoryProducts = mongoose.model("categoryProducts", categoryProductsSchema);
 const Product = mongoose.model('product', ProductSchema);
-module.exports = { Product, Category, Banner, CategoryProducts };
+const CategoryGroup = mongoose.model('categorygroup', CategoryGroupSchema);
+module.exports = { Product, Category, Banner, CategoryProducts, CategoryGroup };
