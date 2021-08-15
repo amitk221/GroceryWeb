@@ -17,24 +17,26 @@
             <thead >
                  <th>No</th>
                  <th>Order ID</th>
-                 <th>Payment Method</th>
                  <th>Status</th>
-                 <th>Total</th>
+                 <th>Amount</th>
+                 <th>Order Detail</th>
                  <th>Actions</th>
              </thead>
              <tbody>
+                 <% for(let i=0; i<orders.length; i++) { %>
                  <tr>
-                     <td>1</td>
-                     <td>#182730</td>
-                     <td>cash</td>
-                     <td><span class="bg-primary p-4 rounded">processing</span></td>
-                     <td>$1234</td>
+                     <td><%= i + 1 %></td>
+                     <td><%= orders[i].orderId %></td>
+                     <td><span class="bg-primary p-4 rounded"><%= orders[i].status%></span></td>
+                     <td><%= orders[i].amount.toFixed(2) %></td>
+                     <td><button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeOrderDetail()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"></i></button></td>
                      <td>
-                         <i class="fa eye fa-eye fa-1x p-2"></i>
-                        <i class="fa trash fa-trash fa-1x p-2"></i>
+                        <button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeAllProduct()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"> Product</i></button>
+                        <button class="btn" id="delOrd" value="<%=orders[i]._id%>" onclick="deleteOrder()" style="margin: 5px;"><i class="fa trash fa-trash fa-1x p-2"> Delete</i></button>
                     </td>
                  </tr>
-                 <tr>
+                 <% } %>
+                 <!-- <tr>
                     <td>2</td>
                     <td>#182731</td>
                     <td>cash</td>
@@ -44,7 +46,7 @@
                         <i class="fa eye fa-eye fa-1x p-2"></i>
                         <i class="fa trash fa-trash fa-1x p-2"></i>
                    </td>
-                </tr>
+                </tr> -->
              </tbody>
         </table>
         </div>
@@ -52,5 +54,19 @@
         </div>
     </div>
     <%- include('partials/footer') %>
+    <script>
+        function deleteOrder(){
+            const orderId = document.querySelector("#delOrd").value;
+            location.replace(`/orders/delete/${orderId}`);
+        }
+        function seeAllProduct(){
+            const orderId = document.querySelector("#viewProd").value;
+            location.replace(`/orders/product/${orderId}`);
+        }
+        function seeOrderDetail(){
+            const orderId = document.querySelector("#viewProd").value;
+            location.replace(`/orders/detail/${orderId}`);
+        }
+    </script>
 </body>
 </html>

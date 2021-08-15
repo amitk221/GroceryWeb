@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">Order Details</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                       <div class="card-body--">
+                          <div class="table-reponsive " style="overflow:auto;">
+
+                             <table class="table  table-bordered table-hover table-dark">
+                                <thead>
+                                      <th>UserID</th>
+                                      <th>Amount</th>
+                                      <th>Discount</th>
+                                      <th>PaymentID</th>
+                                      <th>OrderID</th>
+                                      <th>Status</th>
+                                </thead>
+                                <tbody>
+                                      <th><%=   orders.userId %> </th>
+                                      <th>₹ <%=   orders.amount.toFixed(2) %> </th>
+                                      <th><%=   orders.discount.toFixed(2) %> </th>
+                                      <th><%=   orders.paymentId %> </th>
+                                      <th><%=   orders.orderId %> </th>
+                                      <th><%= orders.status %> </th>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+        <%- include('partials/footer') %>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
