@@ -15,7 +15,7 @@
                 <div id="page-wrapper">
                     <div id="page-inner">
                         <div class="col-lg-3 col-md-3 col-lg-6">
-                            <h2 class="p-3 h2">All Category</h2>
+                            <h2 class="p-3 h2">All Category Groups</h2>
                         </div>
                         <div class="col-lg-12">
                             <div class="card">
@@ -35,23 +35,24 @@
                                             </thead>
                                             <tbody>
 
-                                                <% for (let index = 0; index < categories.length; index++) { %>
+                                                <% for (let index = 0; index < categoryGroups.length; index++) { %>
                                                     <tr>
                                                         <th>
                                                             <%=   index %>
                                                         </th>
-                                                        <th><img src=" <%=   categories[index].image %>" height="120" alt=""> </th>
+                                                        <th><img src=" <%=   categoryGroups[index].imageUrl %>" height="120" alt=""> </th>
                                                         <th>
-                                                            <%=   categories[index].name %>
+                                                            <%=   categoryGroups[index].name %>
                                                         </th>
 
                                                         <th>
-                                                            <%=   categories[index].description %>
+                                                            <%=   categoryGroups[index].description %>
                                                         </th>
 
                                                         <th>
-                                                            <button class="btn" id="<%= categories[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
-                                                            <button class="btn" id="<%= categories[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
+                                                            <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="showCategories(this)"> <i class="fa fa-view"></i></button>
+                                                            <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
+                                                            <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
                                                         </th>
                                                     </tr>
                                                     <%
@@ -68,8 +69,12 @@
                     <%- include('partials/footer') %>
                 </div>
                 <script>
+                    function showCategories(CategoryGroups) {
+                        document.location.href = ('/category_groups/' + CategoryGroups.id + '/categories');
+                    }
+
                     function deleteProduct(product) {
-                        document.location.href = '/category/delete/' + product.id;
+                        document.location.href = ('/category/delete/' + product.id);
                     }
 
                     function updateProduct(product) {

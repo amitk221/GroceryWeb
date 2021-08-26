@@ -2,6 +2,7 @@ const express = require('express');
 const Product = require('../models/product').Product;
 const Banner = require('../models/product').Banner;
 const Category = require('../models/product').Category;
+const CategoryGroup = require('../models/product').CategoryGroup;
 const Admin = require('../models/Admin');
 const formidable = require('formidable');
 const fs = require('fs');
@@ -171,14 +172,28 @@ router.get('/category/delete/:id', async(req, res) => {
 
 
 
-router.get("/categories", async(req, res) => {
+router.get("/category_groups/:id/categories", async(req, res) => {
+    const token = req.cookies.jwt;
+    const categoryGroupId = req.params.id;
+    jwt.verify(token, 'rahulk', async(err, decodedToken) => {
+        let admin = await Admin.findById(decodedToken.id);
+        console.log(categoryGroupId);
+        const categoryGroup = await CategoryGroup.findById(categoryGroupId);
+        console.log(categoryGroup);
+        res.render('categories', { title: "Categories", categories: categoryGroup.categories, admin: admin })
+    });
+});
+
+router.get("/category_groups", async(req, res) => {
     const token = req.cookies.jwt;
     jwt.verify(token, 'rahulk', async(err, decodedToken) => {
         let admin = await Admin.findById(decodedToken.id);
 
-        const categories = await Category.find();
+        const categories = await CategoryGroup.find();
 
-        res.render('categories', { title: "Categories", categories: categories, admin: admin })
+        console.log(categories);
+
+        res.render('categoryGroups', { title: "Category Groups", categoryGroups: categories, admin: admin })
     });
 });
 

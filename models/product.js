@@ -19,17 +19,17 @@ const ProductSchema = new mongoose.Schema({
 
 
 const CategorySchema = new mongoose.Schema({
-    Name: { type: String, required: true },
-    Description: { type: String, required: true },
-    ImageUrl: { type: String, required: false },
-    Products: [{ type: ProductSchema }],
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    imageUrl: { type: String, required: false },
+    products: [{ type: ProductSchema }],
 });
 
 const CategoryGroupSchema = new mongoose.Schema({
-    Name: { type: String, required: true },
-    Description: { type: String, required: true },
-    ImageUrl: { type: String, required: false },
-    Categories: [{ type: CategorySchema }],
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    imageUrl: { type: String, required: false },
+    categories: [{ type: CategorySchema }],
 });
 
 const categoryProductsSchema = new mongoose.Schema({

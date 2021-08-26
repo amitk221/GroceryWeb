@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <%- include('partials/head') %> 
-  
+    <%- include('partials/head') %>
+
 </head>
+
 <body background="#e2e2e2">
     <div id="wrapper">
-        <%- include('partials/nav') %> 
-        <%- include('partials/virnav') %> 
-    <div id="page-wrapper">
-        <div id="page-inner">
-            <div class="table-reponsive" style="overflow:auto;">
-        <table class="table  table-bordered table-hover">
-            <thead >
-                 <th>No</th>
-                 <th>Order ID</th>
-                 <th>Status</th>
-                 <th>Amount</th>
-                 <th>Order Detail</th>
-                 <th>Actions</th>
-             </thead>
-             <tbody>
-                 <% for(let i=0; i<orders.length; i++) { %>
-                 <tr>
-                     <td><%= i + 1 %></td>
-                     <td><%= orders[i].orderId %></td>
-                     <td><span class="bg-primary p-4 rounded"><%= orders[i].status%></span></td>
-                     <td><%= orders[i].amount.toFixed(2) %></td>
-                     <td><button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeOrderDetail()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"></i></button></td>
-                     <td>
-                        <button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeAllProduct()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"> Product</i></button>
-                        <button class="btn" id="delOrd" value="<%=orders[i]._id%>" onclick="deleteOrder()" style="margin: 5px;"><i class="fa trash fa-trash fa-1x p-2"> Delete</i></button>
-                    </td>
-                 </tr>
-                 <% } %>
-                 <!-- <tr>
+        <%- include('partials/nav') %>
+            <%- include('partials/virnav') %>
+                <div id="page-wrapper">
+                    <div id="page-inner">
+                        <div class="table-reponsive" style="overflow:auto;">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                    <th>No</th>
+                                    <th>Order ID</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Order Detail</th>
+                                    <th>Actions</th>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i<orders.length; i++) { %>
+                                        <tr>
+                                            <td>
+                                                <%= i + 1 %>
+                                            </td>
+                                            <td>
+                                                <%= orders[i].orderId %>
+                                            </td>
+                                            <td><span class="bg-primary p-4 rounded"><%= orders[i].status%></span></td>
+                                            <td>
+                                                <%= orders[i].amount.toFixed(2) %>
+                                            </td>
+                                            <td><button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeOrderDetail()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"></i></button></td>
+                                            <td>
+                                                <button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeAllProduct()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"> Product</i></button>
+                                                <button class="btn" id="delOrd" value="<%=orders[i]._id%>" onclick="deleteOrder()" style="margin: 5px;"><i class="fa trash fa-trash fa-1x p-2"> Delete</i></button>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <!-- <tr>
                     <td>2</td>
                     <td>#182731</td>
                     <td>cash</td>
@@ -47,26 +55,29 @@
                         <i class="fa trash fa-trash fa-1x p-2"></i>
                    </td>
                 </tr> -->
-             </tbody>
-        </table>
-        </div>
-        </div>
-        </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
     </div>
     <%- include('partials/footer') %>
-    <script>
-        function deleteOrder(){
-            const orderId = document.querySelector("#delOrd").value;
-            location.replace(`/orders/delete/${orderId}`);
-        }
-        function seeAllProduct(){
-            const orderId = document.querySelector("#viewProd").value;
-            location.replace(`/orders/product/${orderId}`);
-        }
-        function seeOrderDetail(){
-            const orderId = document.querySelector("#viewProd").value;
-            location.replace(`/orders/detail/${orderId}`);
-        }
-    </script>
+        <script>
+            function deleteOrder() {
+                const orderId = document.querySelector("#delOrd").value;
+                document.location.href = (`/orders/delete/${orderId}`);
+            }
+
+            function seeAllProduct() {
+                const orderId = document.querySelector("#viewProd").value;
+                document.location.href = (`/orders/product/${orderId}`);
+            }
+
+            function seeOrderDetail() {
+                const orderId = document.querySelector("#viewProd").value;
+                document.location.href = (`/orders/detail/${orderId}`);
+            }
+        </script>
 </body>
+
 </html>
