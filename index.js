@@ -18,6 +18,7 @@ const Admin = require("./models/Admin");
 const requireAuth = require('./middleware/authmiddleware').requireAuth;
 dotenv.config();
 const Category = require('./models/product').Category;
+const CategoryGroup = require('./models/product').CategoryGroup;
 const Product = require('./models/product').Product;
 const Banner = require('./models/product').Banner;
 const Order = require('./models/Order').Order;
@@ -32,7 +33,7 @@ mongoose.connect(mongoUrl, {
         useUnifiedTopology: true,
         useFindAndModify: false
 
-    }).then((res) => { app.listen(PORT, () => { console.log("connected to the", PORT) }); })
+    }).then((res) => { app.listen(PORT, '0.0.0.0', () => { console.log("connected to the", PORT) }); })
     .catch(error => console.log(error));
 
 
@@ -389,112 +390,9 @@ app.get('/api/activity/home', async(req, res) => {
 
 
 
-    const categories = await Category.find();
+    const categoriesGroups = await CategoryGroup.find();
 
-    var home = `[
-    {
-      "type": "heading",
-      "text": "Exclusive Offer",
-      "color": "#674930"
-    },
-    {
-      "type": "carousel",
-      "items": [
-        {
-          "id": 1,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://www.bigbasket.com/media/uploads/section_item/images/hdpi/HP_atta-banner_1440x692-1stjan21.jpg"
-        },
-        {
-          "id": 2,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://www.bigbasket.com/media/uploads/section_item/images/hdpi/HP_NTP3871_Disinfectant-and-Freshener_1440x692_01Feb21.jpg"
-        },
-        {
-          "id": 3,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://www.bigbasket.com/media/uploads/section_item/images/hdpi/2102026_delicious-snack_692.jpg"
-        },
-        {
-          "id": 4,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://www.bigbasket.com/media/uploads/section_item/images/hdpi/210203_Fresho_meat_Bangalore-1440X692-3rdfeb21.jpg"
-        },
-        {
-          "id": 5,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://www.bigbasket.com/media/uploads/section_item/images/hdpi/2102239_bbpl-staples_692_Bangalore.jpg"
-        },
-        {
-          "id": 6,
-          "title" : "",
-          "category_id" : "",
-          "art": "https://4.bp.blogspot.com/-uhjF2kC3tFc/U_r3myvwzHI/AAAAAAAACiw/tPQ2XOXFYKY/s1600/Circles-3.gif"
-        }
-      ]
-    },
-    {
-      "type": "slider",
-      "title": "Daily Needs",
-      "items": [
-        {
-          "id": 1,
-          "title": "Grocery and Staples",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-10/shop_img01_7.png"
-        },
-        {
-          "id": 2,
-          "title": "Kitchen & Dinning",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2021-01/Kitchen-Dining.png"
-        },
-        {
-          "id": 3,
-          "title": "Household Items",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-10/shop_img03.png"
-        },
-        {
-          "id": 4,
-          "title": "Fruits & Vegetables",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-10/shop_img05.png"
-        },
-        {
-          "id": 5,
-          "title": "Breakfast & Dairy",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-10/shop_img07.png"
-        },
-        {
-          "id": 6,
-          "title": "Lowest Price Brands",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-12/shop_img10-1_3.png"
-        },
-        {
-          "id": 7,
-          "title": "Best Value Brands",
-          "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,w=360,h=391/layout-engine/2020-12/shop_img11-1.png"
-        }
-      ]
-    },
-    {
-      "type": "banner",
-      "art": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,h=225/layout-engine/2021-02/1-flash-sale.jpg",
-      "title" : "50% off",
-      "categoryId": "7786256755"
-    },
-    {
-      "type": "heading",
-      "text": "Shop by Category",
-      "color": "#674930"
-    },
-    {
-      "type": "category",
-      "items": ${JSON.stringify(categories)}
-    }
-  ]`;
+    var home = JSON.stringify(categoriesGroups);
 
     res.write(home);
     res.end();
