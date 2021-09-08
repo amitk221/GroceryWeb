@@ -25,6 +25,7 @@
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
+                                
                                     <% for(let i=0; i<orders.length; i++) { %>
                                         <tr>
                                             <td>
@@ -33,11 +34,11 @@
                                             <td>
                                                 <%= orders[i].orderId %>
                                             </td>
-                                            <td><span class="bg-primary p-4 rounded"><%= orders[i].status%></span></td>
+                                            <td><span class="bg-primary p-4 rounded"><%= orders[i].status %></span></td>
                                             <td>
                                                 <%= orders[i].amount.toFixed(2) %>
                                             </td>
-                                            <td><button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeOrderDetail()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"></i></button></td>
+                                            <td><button class="btn" id="viewdetProd" value='<%= orders[i]._id %>' onclick="seeOrderDetail('<%=orders[i]._id%>')" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"></i></button></td>
                                             <td>
                                                 <button class="btn" id="viewProd" value="<%=orders[i]._id%>" onclick="seeAllProduct()" style="margin: 5px;"><i class="fa eye fa-eye fa-1x p-2"> Product</i></button>
                                                 <button class="btn" id="delOrd" value="<%=orders[i]._id%>" onclick="deleteOrder()" style="margin: 5px;"><i class="fa trash fa-trash fa-1x p-2"> Delete</i></button>
@@ -73,9 +74,9 @@
                 document.location.href = (`/orders/product/${orderId}`);
             }
 
-            function seeOrderDetail() {
-                const orderId = document.querySelector("#viewProd").value;
-                document.location.href = (`/orders/detail/${orderId}`);
+            function seeOrderDetail(val) {
+                // const orderId = document.querySelector("#viewdetProd").value;
+                document.location.href = (`/orders/detail/${val}`);
             }
         </script>
 </body>

@@ -21,23 +21,70 @@
                           <div class="table-reponsive " style="overflow:auto;">
 
                              <table class="table  table-bordered table-hover table-dark">
-                                <thead>
-                                      <th>UserID</th>
-                                      <th>Amount</th>
-                                      <th>Discount</th>
-                                      <th>PaymentID</th>
-                                      <th>OrderID</th>
-                                      <th>Status</th>
-                                </thead>
-                                <tbody>
-                                      <th><%=   orders.userId %> </th>
-                                      <th>₹ <%=   orders.amount.toFixed(2) %> </th>
-                                      <th><%=   orders.discount.toFixed(2) %> </th>
-                                      <th><%=   orders.paymentId %> </th>
-                                      <th><%=   orders.orderId %> </th>
-                                      <th><%= orders.status %> </th>
+                                   
+                                    <tr>
+                                        <td>UserID</td>
+                                        <td><%=   orders.userId %></td>
                                     </tr>
-                                    </tbody>
+                                    <tr>
+                                        <td>Amount</td>
+                                        <td>₹ <%=   orders.amount.toFixed(2) %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td><%=   orders.discount.toFixed(2) %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>PaymentID</td>
+                                        <td><%=   orders.paymentId %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>OrderID</td>
+                                        <td><%=   orders.orderId %></td>
+
+                                    </tr>
+                                    <tr>
+                                            <% if(orders.status === 'Success'){ %>
+                                            <td >Status</td>
+                                            <td><span class="status-success-color"><%= orders.status %></span></td>
+                                            <% }else if(orders.status === 'Pending'){ %>
+                                                <td >Status</td>
+                                                <td><span class="status-pending-color"><%= orders.status %></span></td>
+                                            <% }else{ %>
+                                                <td >Status</td>
+                                                <td><span class="status-failed-color"><%= orders.status %></span></td>
+                                            <%} %>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Address line 1</td>
+                                        <td><%= orders.address.line_1 %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Address line 2</td>
+                                        <td><%= orders.address.line_2 %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Pincode</td>
+                                        <td><%= orders.address.pincode %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td><%= orders.address.city %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>State</td>
+                                        <td><%= orders.address.state %></td>
+
+                                    </tr>
+                                    
                                     </table>
                                     </div>
                                     </div>
