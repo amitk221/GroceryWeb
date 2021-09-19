@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper" >
+        <%- include('partials/nav') %> 
+        <%- include('partials/sidenav') %> 
+          <div id="page-wrapper" style="background-color: #ffffff;">
+              <div class="shadow" id="msg" style="background-color: blue;color: #ffffff;position: fixed;float: right;right: 0;z-index: 99;">
+            
+              </div>
+              <div  class="row" style="margin: 0 auto; ">
+                  <div class="col-sm-6 col-10 m-0 m-auto ">
+                      <div class="card shadow" style="padding: 3rem;margin-top: 3rem;">
+                        <h3 style="text-align: center;padding: 1.2rem;font-weight: bold;" >Update profile</h3>
+                        <form action="">
+                            <div class="form__group field">
+                                <input type="text" name="email" class="form-control" id="email" value="<%= admin.email %> ">
+                                <label for="email" class="form__label">Email</label>
+                            </div>
+                            <input type="hidden" value="<%= admin._id %> " name="id" >
+                            <div class="form__group field">
+                              <input type="text" name="password" class="form-control" id="password1">
+                              <label for="email" class="form__label">Password</label>
+                          </div>
+                          <div class="form__group field">
+                            <input type="text" name="password1" class="form-control" id="password2" onchange="checker()">
+                            <label for="email" class="form__label">Password</label>
+                            <p id="err" style="color: red;"></p>
+                        </div>
+                            <div style="display: block;padding: 1.3rem;text-align: center;">
+                                <button class="btn btn-primary"  >Update</button> 
+                            </div>
+                        </form>
+                      </div>
+                     
+                  </div>
+              </div>
+          </div>
+
+        <%- include('partials/footer') %>
+    </div>
+
+
+    <script>
+        const form=document.querySelector('form');
+        function checker(){
+            
+           const p1=form.password.value;
+           let err= document.getElementById("err");
+           const p2=form.password1.value;
+           console.log(p1,p2);
+           if(p1===p2){
+            err.textContent="";
+           }
+           else if(p1!==p2){
+           
+            err.textContent="password not matching";
+           }
+           else{
+               return;
+           }
+        }
+         
+        
+        
+ 
+        form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+        const email=form.email.value;
+        const password=form.password.value;
+        const id=form.id.value;
+        const msg=document.getElementById("msg");
+        try{
+           const res= fetch("/update/"+id,{
+                method:'POST',
+                body:JSON.stringify({email,password}),
+                headers:{'Content-Type':'application/json'}
+            }).then((res)=>{return res.json()}).then((result=>{  msg.innerHTML=result.msg;
+                                                                msg.style.padding='1.5rem';
+                                                  console.log(result)}));
+          const data=await res.json();
+          console.log(data);
+        }
+        catch(err){
+           console.log(err)
+        }
+        });
+     
+     </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <%- include('partials/head') %> 
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('partials/nav') %> 
+        <%- include('partials/virnav') %> 
+  
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="col-lg-3 col-md-3 col-lg-6">
+                    <h2 class="p-3 h2">Order Details</h2> 
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                       <div class="card-body--">
+                          <div class="table-reponsive " style="overflow:auto;">
+
+                             <table class="table  table-bordered table-hover table-dark">
+                                   
+                                    <tr>
+                                        <td>UserID</td>
+                                        <td><%=   orders.userId %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount</td>
+                                        <td>₹ <%=   orders.amount.toFixed(2) %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td><%=   orders.discount.toFixed(2) %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>PaymentID</td>
+                                        <td><%=   orders.paymentId %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>OrderID</td>
+                                        <td><%=   orders.orderId %></td>
+
+                                    </tr>
+                                    <tr>
+                                            <% if(orders.status === 'Success'){ %>
+                                            <td >Status</td>
+                                            <td><span class="status-success-color"><%= orders.status %></span></td>
+                                            <% }else if(orders.status === 'Pending'){ %>
+                                                <td >Status</td>
+                                                <td><span class="status-pending-color"><%= orders.status %></span></td>
+                                            <% }else{ %>
+                                                <td >Status</td>
+                                                <td><span class="status-failed-color"><%= orders.status %></span></td>
+                                            <%} %>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Address line 1</td>
+                                        <td><%= orders.address.line_1 %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Address line 2</td>
+                                        <td><%= orders.address.line_2 %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Pincode</td>
+                                        <td><%= orders.address.pincode %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td><%= orders.address.city %></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>State</td>
+                                        <td><%= orders.address.state %></td>
+
+                                    </tr>
+                                    
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+        <%- include('partials/footer') %>
+    </div>
+    <script>
+    </script>
+</body>
+</html>
