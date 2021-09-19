@@ -17,17 +17,23 @@
                         <div class="col-lg-3 col-md-3 col-lg-6">
                             <h2 class="p-3 h2">All Category Groups</h2>
                         </div>
+                        <div>
+                            <a href="/add_category"><button class="btn btn-success pull-right">Add Category</button></a>
+                        </div>
+                        
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body--">
                                     <div class="table-reponsive table-stats order-table ov-h " style="overflow:auto;">
                                         <table class="table  table-bordered table-hover">
                                             <thead>
+                            
                                                 <tr>
 
                                                     <th>ID</th>
                                                     <th>image</th>
                                                     <th>Categories</th>
+                                                    <th>Type</th>
                                                     <th>Description</th>
                                                     <th>Actions</th>
 
@@ -44,13 +50,15 @@
                                                         <th>
                                                             <%=   categoryGroups[index].name %>
                                                         </th>
-
+                                                        <th>
+                                                            <%= categoryGroups[index].type %>
+                                                        </th>
                                                         <th>
                                                             <%=   categoryGroups[index].description %>
                                                         </th>
-
+                                                        
                                                         <th>
-                                                            <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="showCategories(this)"> <i class="fa fa-view"></i></button>
+                                                            <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="showCategories(this)"> <i class="fa eye fa-eye fa-1x p-2"></i></button>
                                                             <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="updateProduct(this)"> <i class="fa fa-edit"></i></button>
                                                             <button class="btn" id="<%= categoryGroups[index]._id %>" onclick="deleteProduct(this)"> <i class="fa fa-trash"></i></button>
                                                         </th>
